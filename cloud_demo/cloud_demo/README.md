@@ -35,8 +35,8 @@ Classes: 0 clear land, 1 clear sea, 2 cloud. A tile counts as cloud when its clo
 - Python results (results.png: 100 simulated scenes; earlier check: 300 random scenes): cloud is about 36% of tiles; cloud discarded 98.3% (rule) vs 99.2% (network); clear tiles wrongly discarded 1.6% vs 0.7%; bytes to downlink 64% of raw (a 36% saving, bounded by the cloud share).
 - Not tested: a real board, serial plotting with hardware. The sketch needs little RAM (no pixel buffer, tile statistics are accumulated on the fly), but check in the Arduino IDE. Floating-point maths is slow on an 8-bit Uno; a Nano Every, Nano 33, ESP32 or Teensy is safer.
 
-## Limits (say them in the talk)
+## Limits
 - Synthetic, low-resolution tiles. I added bright sand on purpose because bright deserts and snow are a known source of confusion with cloud, so the network's edge over the rule reflects my simulator, not real imagery.
-- The gain over a simple rule is small. A decision tree or a second threshold on whiteness may do about as well; I have not tested that.
+- The gain over a simple rule is small. A decision tree or a second threshold on whiteness may do about as well.
 - Cloud screening alone saves at most the cloud share of the bytes, so it does not close the downlink gap by itself; prioritising and compressing matter too.
 - The earlier signal-burst demo is kept in `../space_demo` for reference.
