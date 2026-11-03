@@ -16,7 +16,6 @@ On the board, per tile:
 - `obc_cloud/obc_cloud.ino` + `obc_cloud/model.h`: the sketch for the board
 - `live_plot.py`: live graphs from the board (`--port`) or without hardware (`--sim`); `--log run.csv` records every tile
 - `plot_results.py`: the polished results figure, from a logged run (`--csv`) or the simulation (`--sim`)
-- `talk_outline.md`: the two-part talk script
 
 ## Steps
 1. `pip install numpy matplotlib pyserial`
