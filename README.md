@@ -18,30 +18,8 @@ Learned: a tiny 5-8-3 neural network (75 parameters, 300 bytes) on the same five
 
 Policy: discard a tile only if P(cloud) > 0.6; otherwise send it (tiles with P between 0.35 and 0.6 are sent and marked unsure). A doubtful decision costs bytes, not data.
 
-## Files
-
-cloud_sim.py: tile and scene generator, features, rule, MLP forward pass (single source of truth)
-
-
-train_model.py: fits the brightness threshold, trains the MLP, writes model.npz and obc_cloud/model.h (including one demo scene)
-
-
-obc_cloud/obc_cloud.ino + obc_cloud/model.h: the sketch for the board
-
-
-live_plot.py: live graphs from the board (--port) or without hardware (--sim); --log run.csv records every tile
-
-
-plot_results.py: the polished results figure, from a logged run (--csv) or the simulation (--sim)
-
-
-talk_outline.md: the two-part talk script
-
-
 
 ## Steps
-pip install numpy matplotlib pyserial
-
 
 python3 train_model.py (outputs are included; rerun only if you change cloud_sim.py)
 
