@@ -1,6 +1,6 @@
 # On-board cloud screening demo kit
 
-An Arduino plays a CubeSat on-board computer (OBC) that screens image tiles for cloud and discards the cloudy ones before downlink. It is a toy version of what ESA's Phi-Sat-1 and Phi-Sat-2 do on board (cloud detection), built for the seminar "Intelligent Data Systems and AI for Autonomous Space Technology". The pixels are synthetic, and ESA does not publish the details used here, so this is the same idea, not a copy of their method.
+An Arduino plays a CubeSat on-board computer (OBC) that screens image tiles for cloud and discards the cloudy ones before downlink. It is a toy version of what ESA's Phi-Sat-1 and Phi-Sat-2 do on board (cloud detection). The pixels are synthetic, and ESA does not publish the details used here, so this is the same idea, not a copy of their method.
 
 A scene is 16 x 8 tiles; a tile is 8 x 8 pixels in four bands (red, green, blue, near-infrared), generated from a surface type (land, sea, bright sand) plus a cloud fraction.
 
@@ -18,8 +18,7 @@ On the board, per tile:
 - `plot_results.py`: the polished results figure, from a logged run (`--csv`) or the simulation (`--sim`)
 
 ## Steps
-1. `pip install numpy matplotlib pyserial`
-2. `python3 train_model.py` (outputs are included; rerun only if you change `cloud_sim.py`)
+1. `python3 train_model.py` (outputs are included; rerun only if you change `cloud_sim.py`)
 3. Open `obc_cloud/obc_cloud.ino` in the Arduino IDE, select your board, upload (keep `model.h` beside it).
 4. Close the Serial Monitor, then `python3 live_plot.py --port /dev/ttyACM0` (Windows: `COM3`).
 5. No board: `python3 live_plot.py --sim`. Headless snapshot: `python3 live_plot.py --sim --save demo.png`.
@@ -35,7 +34,7 @@ Classes: 0 clear land, 1 clear sea, 2 cloud. A tile counts as cloud when its clo
 - Not tested: a real board, serial plotting with hardware. The sketch needs little RAM (no pixel buffer, tile statistics are accumulated on the fly), but check in the Arduino IDE. Floating-point maths is slow on an 8-bit Uno; a Nano Every, Nano 33, ESP32 or Teensy is safer.
 
 ## Limits
-- Synthetic, low-resolution tiles. I added bright sand on purpose because bright deserts and snow are a known source of confusion with cloud, so the network's edge over the rule reflects my simulator, not real imagery.
+- Synthetic, low-resolution tiles. Bright sand added on purpose because bright deserts and snow are a known source of confusion with cloud, so the network's edge over the rule reflects my simulator, not real imagery.
 - The gain over a simple rule is small. A decision tree or a second threshold on whiteness may do about as well.
 - Cloud screening alone saves at most the cloud share of the bytes, so it does not close the downlink gap by itself; prioritising and compressing matter too.
 - The earlier signal-burst demo is kept in `../space_demo` for reference.
